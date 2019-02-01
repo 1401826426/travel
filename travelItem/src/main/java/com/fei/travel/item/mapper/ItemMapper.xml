@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fei.crawlers.mapper.ItemMapper">
+  <resultMap id="BaseResultMap" type="com.fei.crawlers.pojo.Item">
+    <!-- @ibatorgenerated -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="default_pic" jdbcType="VARCHAR" property="defaultPic" />
+    <result column="st_price" jdbcType="INTEGER" property="stPrice" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+    <result column="star" jdbcType="DECIMAL" property="star" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!-- @ibatorgenerated -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!-- @ibatorgenerated -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!-- @ibatorgenerated -->
+    id, type, name, default_pic, st_price, city_id, tips, times, star
+  </sql>
+  <select id="selectByExample" parameterType="com.fei.crawlers.pojo.ItemExample" resultMap="BaseResultMap">
+    <!-- @ibatorgenerated -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!-- @ibatorgenerated -->
+    select 
+    <include refid="Base_Column_List" />
+    from item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!-- @ibatorgenerated -->
+    delete from item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fei.crawlers.pojo.ItemExample">
+    <!-- @ibatorgenerated -->
+    delete from item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fei.crawlers.pojo.Item">
+    <!-- @ibatorgenerated -->
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into item (type, name, default_pic, 
+      st_price, city_id, tips, 
+      times, star)
+    values (#{type,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{defaultPic,jdbcType=VARCHAR}, 
+      #{stPrice,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{tips,jdbcType=VARCHAR}, 
+      #{times,jdbcType=INTEGER}, #{star,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fei.crawlers.pojo.Item">
+    <!-- @ibatorgenerated -->
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="defaultPic != null">
+        default_pic,
+      </if>
+      <if test="stPrice != null">
+        st_price,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="tips != null">
+        tips,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+      <if test="star != null">
+        star,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultPic != null">
+        #{defaultPic,jdbcType=VARCHAR},
+      </if>
+      <if test="stPrice != null">
+        #{stPrice,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="tips != null">
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="star != null">
+        #{star,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fei.crawlers.pojo.ItemExample" resultType="java.lang.Long">
+    <!-- @ibatorgenerated -->
+    select count(*) from item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!-- @ibatorgenerated -->
+    update item
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultPic != null">
+        default_pic = #{record.defaultPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stPrice != null">
+        st_price = #{record.stPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityId != null">
+        city_id = #{record.cityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tips != null">
+        tips = #{record.tips,jdbcType=VARCHAR},
+      </if>
+      <if test="record.times != null">
+        times = #{record.times,jdbcType=INTEGER},
+      </if>
+      <if test="record.star != null">
+        star = #{record.star,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!-- @ibatorgenerated -->
+    update item
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      default_pic = #{record.defaultPic,jdbcType=VARCHAR},
+      st_price = #{record.stPrice,jdbcType=INTEGER},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      tips = #{record.tips,jdbcType=VARCHAR},
+      times = #{record.times,jdbcType=INTEGER},
+      star = #{record.star,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fei.crawlers.pojo.Item">
+    <!-- @ibatorgenerated -->
+    update item
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultPic != null">
+        default_pic = #{defaultPic,jdbcType=VARCHAR},
+      </if>
+      <if test="stPrice != null">
+        st_price = #{stPrice,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="tips != null">
+        tips = #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="star != null">
+        star = #{star,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fei.crawlers.pojo.Item">
+    <!-- @ibatorgenerated -->
+    update item
+    set type = #{type,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      default_pic = #{defaultPic,jdbcType=VARCHAR},
+      st_price = #{stPrice,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      tips = #{tips,jdbcType=VARCHAR},
+      times = #{times,jdbcType=INTEGER},
+      star = #{star,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOneByExample" parameterType="com.fei.crawlers.pojo.ItemExample" resultMap="BaseResultMap">
+    <!-- @ibatorgenerated -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 0,1
+  </select>
+</mapper>

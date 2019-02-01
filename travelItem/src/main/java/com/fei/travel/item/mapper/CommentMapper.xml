@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fei.crawlers.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.fei.crawlers.pojo.Comment">
+    <!-- @ibatorgenerated -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="lv" jdbcType="INTEGER" property="lv" />
+    <result column="vip_lv" jdbcType="INTEGER" property="vipLv" />
+    <result column="view_star" jdbcType="DECIMAL" property="viewStar" />
+    <result column="fun_star" jdbcType="DECIMAL" property="funStar" />
+    <result column="value_for_money_star" jdbcType="DECIMAL" property="valueForMoneyStar" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="pics" jdbcType="VARCHAR" property="pics" />
+    <result column="be_liked_num" jdbcType="INTEGER" property="beLikedNum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!-- @ibatorgenerated -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!-- @ibatorgenerated -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!-- @ibatorgenerated -->
+    id, user_id, user_name, lv, vip_lv, view_star, fun_star, value_for_money_star, content, 
+    pics, be_liked_num
+  </sql>
+  <select id="selectByExample" parameterType="com.fei.crawlers.pojo.CommentExample" resultMap="BaseResultMap">
+    <!-- @ibatorgenerated -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!-- @ibatorgenerated -->
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!-- @ibatorgenerated -->
+    delete from comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fei.crawlers.pojo.CommentExample">
+    <!-- @ibatorgenerated -->
+    delete from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fei.crawlers.pojo.Comment">
+    <!-- @ibatorgenerated -->
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment (user_id, user_name, lv, 
+      vip_lv, view_star, fun_star, 
+      value_for_money_star, content, pics, 
+      be_liked_num)
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{lv,jdbcType=INTEGER}, 
+      #{vipLv,jdbcType=INTEGER}, #{viewStar,jdbcType=DECIMAL}, #{funStar,jdbcType=DECIMAL}, 
+      #{valueForMoneyStar,jdbcType=DECIMAL}, #{content,jdbcType=VARCHAR}, #{pics,jdbcType=VARCHAR}, 
+      #{beLikedNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fei.crawlers.pojo.Comment">
+    <!-- @ibatorgenerated -->
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="lv != null">
+        lv,
+      </if>
+      <if test="vipLv != null">
+        vip_lv,
+      </if>
+      <if test="viewStar != null">
+        view_star,
+      </if>
+      <if test="funStar != null">
+        fun_star,
+      </if>
+      <if test="valueForMoneyStar != null">
+        value_for_money_star,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="pics != null">
+        pics,
+      </if>
+      <if test="beLikedNum != null">
+        be_liked_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="lv != null">
+        #{lv,jdbcType=INTEGER},
+      </if>
+      <if test="vipLv != null">
+        #{vipLv,jdbcType=INTEGER},
+      </if>
+      <if test="viewStar != null">
+        #{viewStar,jdbcType=DECIMAL},
+      </if>
+      <if test="funStar != null">
+        #{funStar,jdbcType=DECIMAL},
+      </if>
+      <if test="valueForMoneyStar != null">
+        #{valueForMoneyStar,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="pics != null">
+        #{pics,jdbcType=VARCHAR},
+      </if>
+      <if test="beLikedNum != null">
+        #{beLikedNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fei.crawlers.pojo.CommentExample" resultType="java.lang.Long">
+    <!-- @ibatorgenerated -->
+    select count(*) from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!-- @ibatorgenerated -->
+    update comment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lv != null">
+        lv = #{record.lv,jdbcType=INTEGER},
+      </if>
+      <if test="record.vipLv != null">
+        vip_lv = #{record.vipLv,jdbcType=INTEGER},
+      </if>
+      <if test="record.viewStar != null">
+        view_star = #{record.viewStar,jdbcType=DECIMAL},
+      </if>
+      <if test="record.funStar != null">
+        fun_star = #{record.funStar,jdbcType=DECIMAL},
+      </if>
+      <if test="record.valueForMoneyStar != null">
+        value_for_money_star = #{record.valueForMoneyStar,jdbcType=DECIMAL},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pics != null">
+        pics = #{record.pics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beLikedNum != null">
+        be_liked_num = #{record.beLikedNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!-- @ibatorgenerated -->
+    update comment
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      lv = #{record.lv,jdbcType=INTEGER},
+      vip_lv = #{record.vipLv,jdbcType=INTEGER},
+      view_star = #{record.viewStar,jdbcType=DECIMAL},
+      fun_star = #{record.funStar,jdbcType=DECIMAL},
+      value_for_money_star = #{record.valueForMoneyStar,jdbcType=DECIMAL},
+      content = #{record.content,jdbcType=VARCHAR},
+      pics = #{record.pics,jdbcType=VARCHAR},
+      be_liked_num = #{record.beLikedNum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fei.crawlers.pojo.Comment">
+    <!-- @ibatorgenerated -->
+    update comment
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="lv != null">
+        lv = #{lv,jdbcType=INTEGER},
+      </if>
+      <if test="vipLv != null">
+        vip_lv = #{vipLv,jdbcType=INTEGER},
+      </if>
+      <if test="viewStar != null">
+        view_star = #{viewStar,jdbcType=DECIMAL},
+      </if>
+      <if test="funStar != null">
+        fun_star = #{funStar,jdbcType=DECIMAL},
+      </if>
+      <if test="valueForMoneyStar != null">
+        value_for_money_star = #{valueForMoneyStar,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="pics != null">
+        pics = #{pics,jdbcType=VARCHAR},
+      </if>
+      <if test="beLikedNum != null">
+        be_liked_num = #{beLikedNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fei.crawlers.pojo.Comment">
+    <!-- @ibatorgenerated -->
+    update comment
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      lv = #{lv,jdbcType=INTEGER},
+      vip_lv = #{vipLv,jdbcType=INTEGER},
+      view_star = #{viewStar,jdbcType=DECIMAL},
+      fun_star = #{funStar,jdbcType=DECIMAL},
+      value_for_money_star = #{valueForMoneyStar,jdbcType=DECIMAL},
+      content = #{content,jdbcType=VARCHAR},
+      pics = #{pics,jdbcType=VARCHAR},
+      be_liked_num = #{beLikedNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectOneByExample" parameterType="com.fei.crawlers.pojo.CommentExample" resultMap="BaseResultMap">
+    <!-- @ibatorgenerated -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 0,1
+  </select>
+</mapper>
